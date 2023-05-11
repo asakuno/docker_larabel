@@ -29,3 +29,5 @@ Route::get('/bunbougus/edit/{bunbougu}', [BunbouguController::class, 'edit'])->n
 Route::put('/bunbougus/update/{bunbougu}', [BunbouguController::class, 'update'])->name('bunbougu.update');
 
 Route::get('/bunbougus/show/{bunbougu}', [BunbouguController::class, 'show'])->name('bunbougu.show');
+
+Route::delete('/bunbougus/delete/{bunbougu}', [BunbouguController::class, 'destroy'])->name('bunbougu.destroy');
