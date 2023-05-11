@@ -7,7 +7,7 @@
         <h2 style="font-size:1rem;">文房具</h2>
       </div>
       <div class="text-right">
-        <a class="btn btn-success" href="#">新規登録</a>
+        <a class="btn btn-success" href="{{ route('bunbougu.create') }}" role="button">新規登録</a>
       </div>
     </div>
   </div>
@@ -18,13 +18,15 @@
       <th>名前</th>
       <th>価格</th>
       <th>分類</th>
+      <th>詳細</th>
     </tr>
     @foreach ($bunbougus as $bunbougu)
     <tr>
       <td style="text-align:right">{{ $bunbougu->id }}</td>
       <td>{{ $bunbougu->name }}</td>
       <td style="text-align:right">{{ $bunbougu->price }}円</td>
-      <td style="text-align:right">{{ $bunbougu->class }}</td>
+      <td style="text-align:right">{{ $bunbougu->kind }}</td>
+      <td style="text-align:left">{{ $bunbougu->description }}</td>
     </tr>
     @endforeach
   </table>
