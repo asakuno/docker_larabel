@@ -104,7 +104,20 @@ class BunbouguController extends Controller
      */
     public function update(Request $request, Bunbougu $bunbougu)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:20',
+            'price' => 'required|integer',
+            'kind' => 'required|integer',
+            'description' => 'required|max:140',
+        ]);
+
+        $bunbougu->name = $request->input(["name"]);
+        $bunbougu->price = $request->input(["price"]);
+        $bunbougu->kind = $request->input(["kind"]);
+        $bunbougu->description = $request->input(["description"]);
+        $bunbougu->save();
+
+        return redirect()->route('bunbougus.index');
     }
 
     /**
