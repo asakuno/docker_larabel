@@ -132,6 +132,8 @@ class BunbouguController extends Controller
      */
     public function destroy(Bunbougu $bunbougu)
     {
-        //
+        $bunbougu->delete();
+        return redirect()->route('bunbougus.index')
+                        ->with('success', '文房具'.$bunbougu->name.'を削除しました');
     }
 }
