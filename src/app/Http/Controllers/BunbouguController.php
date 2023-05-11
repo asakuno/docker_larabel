@@ -31,7 +31,8 @@ class BunbouguController extends Controller
 
 
         return view('index', compact('bunbougus'))
-               ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('page_id',request()->page)
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -79,7 +80,10 @@ class BunbouguController extends Controller
      */
     public function show(Bunbougu $bunbougu)
     {
-        //
+        $kinds = Kind::all();
+        return view('show', compact('bunbougu'))
+            ->with('page_id',request()->page_id)
+            ->with('kinds', $kinds);
     }
 
     /**
