@@ -69,7 +69,8 @@ class BunbouguController extends Controller
         $bunbougu->description = $request->input(["description"]);
         $bunbougu->save();
 
-        return redirect()->route('bunbougus.index');
+        return redirect()->route('bunbougus.index')
+                        ->with('success', '文房具'.$bunbougu->name.'を作成しました');
     }
 
     /**
@@ -121,7 +122,8 @@ class BunbouguController extends Controller
         $bunbougu->description = $request->input(["description"]);
         $bunbougu->save();
 
-        return redirect()->route('bunbougus.index');
+        return redirect()->route('bunbougus.index')
+                        ->with('success', '文房具'.$bunbougu->name.'を更新しました');
     }
 
     /**
