@@ -90,7 +90,9 @@ class BunbouguController extends Controller
      */
     public function edit(Bunbougu $bunbougu)
     {
-        //
+        $kinds = Kind::all();
+        return view('edit', compact('bunbougu'))
+            ->with('kinds', $kinds);
     }
 
     /**

@@ -27,6 +27,9 @@
       <td style="text-align:right">{{ $bunbougu->price }}円</td>
       <td style="text-align:right">{{ $bunbougu->kind }}</td>
       <td style="text-align:left">{{ $bunbougu->description }}</td>
+      <td style="text-align:center">
+        <a class="btn btn-primary" href="{{ route('bunbougu.edit', $bunbougu->id) }}">変更</a>
+      </td>
     </tr>
     @endforeach
   </table>

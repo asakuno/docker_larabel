@@ -25,5 +25,5 @@ Route::get('/bunbougus', [BunbouguController::class, 'index'])->name('bunbougus.
 Route::get('/bunbougus/create', [BunbouguController::class, 'create'])->name('bunbougu.create');
 Route::post('/bunbougus/store', [BunbouguController::class, 'store'])->name('bunbougu.store');
 
-Route::get('/bunbougus/edit/(bunbougu}', [BunbouguController::class, 'edit'])->name('bunbougu.edit');
-Route::put('/bunbougus/update/(bunbougu}', [BunbouguController::class, 'update'])->name('bunbougu.update');
+Route::get('/bunbougus/edit/{bunbougu}', [BunbouguController::class, 'edit'])->name('bunbougu.edit');
+Route::put('/bunbougus/update/{bunbougu}', [BunbouguController::class, 'update'])->name('bunbougu.update');
