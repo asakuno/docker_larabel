@@ -15,7 +15,20 @@ class BunbouguController extends Controller
      */
     public function index()
     {
-        $bunbougus = Bunbougu::latest()->paginate(5);
+        $bunbougus = Bunbougu::select([
+            'b.id',
+            'b.name',
+            'b.price',
+            'b.description',
+            'k.name as kind',
+        ])
+        ->from('bunbougus as b')
+        ->join('kinds as k', function($join){
+            $join->on('b.kind', '=', 'k.id');
+        })
+        ->orderBy('b.id', 'DESC')
+        ->paginate(5);
+
 
         return view('index', compact('bunbougus'))
                ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -77,7 +90,9 @@ class BunbouguController extends Controller
      */
     public function edit(Bunbougu $bunbougu)
     {
-        //
+        $kinds = Kind::all();
+        return view('edit', compact('bunbougu'))
+            ->with('kinds', $kinds);
     }
 
     /**
@@ -89,7 +104,20 @@ class BunbouguController extends Controller
      */
     public function update(Request $request, Bunbougu $bunbougu)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:20',
+            'price' => 'required|integer',
+            'kind' => 'required|integer',
+            'description' => 'required|max:140',
+        ]);
+
+        $bunbougu->name = $request->input(["name"]);
+        $bunbougu->price = $request->input(["price"]);
+        $bunbougu->kind = $request->input(["kind"]);
+        $bunbougu->description = $request->input(["description"]);
+        $bunbougu->save();
+
+        return redirect()->route('bunbougus.index');
     }
 
     /**
