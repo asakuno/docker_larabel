@@ -15,7 +15,20 @@ class BunbouguController extends Controller
      */
     public function index()
     {
-        $bunbougus = Bunbougu::latest()->paginate(5);
+        $bunbougus = Bunbougu::select([
+            'b.id',
+            'b.name',
+            'b.price',
+            'b.description',
+            'k.name as kind',
+        ])
+        ->from('bunbougus as b')
+        ->join('kinds as k', function($join){
+            $join->on('b.kind', '=', 'k.id');
+        })
+        ->orderBy('b.id', 'DESC')
+        ->paginate(5);
+
 
         return view('index', compact('bunbougus'))
                ->with('i', (request()->input('page', 1) - 1) * 5);
