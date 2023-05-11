@@ -12,6 +12,14 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-md-12">
+      @if ($message = Session::get('success'))
+        <div class="alert alert-success mt-1"><p>{{ $message }}</p></div>
+      @endif
+    </div>
+  </div>
+
   <table class="table table-bordered">
     <tr>
       <th>No</th>
@@ -19,6 +27,8 @@
       <th>価格</th>
       <th>分類</th>
       <th>詳細</th>
+      <th></th>
+      <th></th>
     </tr>
     @foreach ($bunbougus as $bunbougu)
     <tr>
@@ -33,6 +43,13 @@
       <td style="text-align:left">{{ $bunbougu->description }}</td>
       <td style="text-align:center">
         <a class="btn btn-primary" href="{{ route('bunbougu.edit', $bunbougu->id) }}">変更</a>
+      </td>
+      <td style="text-align:center">
+        <form action="{{ route('bunbougu.destroy', $bunbougu->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button class="btn btn-sm btn-danger" onclick='return confirm("削除してもよろしいですか？")'>削除</button>
+        </form>
       </td>
     </tr>
     @endforeach
